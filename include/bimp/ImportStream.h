@@ -23,7 +23,9 @@ public:
 	uint32_t UInt32();
 
 	const char* Block(int sz);
-	const char* Stream();
+
+	const char* Stream() const { return m_stream; }
+	int Size() const { return m_size; }
 
 	const char* String(Allocator& alloc);
 	std::string String();
