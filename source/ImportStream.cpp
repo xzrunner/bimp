@@ -70,11 +70,6 @@ const char* ImportStream::Block(int sz)
 	return ret;
 }
 
-const char* ImportStream::Stream()
-{
-	return m_stream;
-}
-
 const char* ImportStream::String(Allocator& alloc)
 {
 	int n = UInt8();
