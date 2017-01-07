@@ -74,7 +74,6 @@ void FileLoader::LoadFile()
 	fs_file* file = fs_open(m_filepath.c_str(), "rb");
 	if (!file) {
 		fault("open file fail: %s\n", m_filepath.c_str());
-		return;
 	}
 
 	int32_t sz = 0;
