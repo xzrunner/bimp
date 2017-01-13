@@ -22,6 +22,8 @@ public:
 	uint16_t UInt16();
 	uint32_t UInt32();
 
+	float Float();
+
 	const char* Block(int sz);
 
 	const char* Stream() const { return m_stream; }

@@ -57,6 +57,14 @@ uint32_t ImportStream::UInt32()
 	return b[0] | (uint32_t)b[1] << 8 | (uint32_t)b[2] << 16 | (uint32_t)b[3] << 24;
 }
 
+float ImportStream::Float()
+{
+	uint32_t i = UInt32();
+	float f;
+	memcpy(&f, &i, 4);
+	return f;
+}
+
 const char* ImportStream::Block(int sz)
 {
 	if (m_size < sz) {
