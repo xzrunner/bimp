@@ -1,5 +1,7 @@
 #include "Allocator.h"
 
+#include <fault.h>
+
 #include <stddef.h>
 
 namespace bimp
@@ -22,6 +24,7 @@ void* Allocator::Alloc(int sz)
 		return NULL;
 	}
 	if (m_cap < sz) {
+		fault("Allocator::Alloc too large");
 		return NULL;
 	}
 	void* ret = m_buffer;
