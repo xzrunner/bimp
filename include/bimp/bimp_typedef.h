@@ -1,5 +1,5 @@
-#ifndef _BIMP_DEFINES_H_
-#define _BIMP_DEFINES_H_
+#ifndef _BIMP_TYPEDEF_H_
+#define _BIMP_TYPEDEF_H_
 
 namespace bimp
 {
@@ -10,4 +10,4 @@ namespace bimp
 
 }
 
-#endif // _BIMP_DEFINES_H_
+#endif // _BIMP_TYPEDEF_H_
