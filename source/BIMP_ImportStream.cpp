@@ -1,4 +1,4 @@
-#include "ImportStream.h"
+#include "BIMP_ImportStream.h"
 #include "Allocator.h"
 #include "bimp_typedef.h"
 
