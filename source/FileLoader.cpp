@@ -1,5 +1,5 @@
 #include "FileLoader.h"
-#include "ImportStream.h"
+#include "BIMP_ImportStream.h"
 #include "bimp_typedef.h"
 
 #include <fault.h>
