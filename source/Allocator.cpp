@@ -24,7 +24,7 @@ void* Allocator::Alloc(int sz)
 		return NULL;
 	}
 	if (m_cap < sz) {
-		fault("Allocator::Alloc too large");
+		fault("Allocator::Alloc too large, sz %d, cap %d\n", sz, m_cap);
 		return NULL;
 	}
 	void* ret = m_buffer;
