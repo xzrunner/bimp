@@ -154,23 +154,23 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\source\BIMP_ImportStream.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\bimp\BIMP_ImportStream.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\include\bimp\bimp_typedef.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\source\FileLoader.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\include\bimp\FileLoader.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\ImportStream.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\bimp\ImportStream.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\bimp\typedef.h"
 			>
 		</File>
 	</Files>
