@@ -3,6 +3,7 @@
 #include "bimp_typedef.h"
 
 #include <fault.h>
+#include <string.h>
 
 namespace bimp
 {
