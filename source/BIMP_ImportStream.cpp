@@ -101,7 +101,7 @@ std::string ImportStream::String()
 {
 	int n = UInt8();
 	if (n == 255) {
-		return NULL;
+		return "";
 	}
 	if (m_size < n) {
 		fault("Invalid import String");
