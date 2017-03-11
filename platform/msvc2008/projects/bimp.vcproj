@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\bimp;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
+				AdditionalIncludeDirectories="..\..\..\include;..\..\..\include\bimp;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\bimp;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
+				AdditionalIncludeDirectories="..\..\..\include;..\..\..\include\bimp;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
