@@ -10,6 +10,8 @@
 
 #include <stdint.h>
 
+#include "logger.h"
+
 namespace bimp
 {
 
@@ -75,6 +77,8 @@ void FileLoader::LoadFile()
 	if (!file) {
 		fault("open file fail: %s\n", m_filepath.c_str());
 	}
+
+	LOGD(" load file : %s\n", m_filepath.c_str());
 
 	int32_t sz = 0;
 	fs_read(file, &sz, sizeof(sz));
