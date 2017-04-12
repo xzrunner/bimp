@@ -78,8 +78,6 @@ void FileLoader::LoadFile()
 		fault("open file fail: %s\n", m_filepath.c_str());
 	}
 
-	LOGD(" load file : %s\n", m_filepath.c_str());
-
 	int32_t sz = 0;
 	fs_read(file, &sz, sizeof(sz));
 	if (sz < 0)
