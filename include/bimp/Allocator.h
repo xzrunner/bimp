@@ -18,10 +18,12 @@ public:
 
 	// for debug
 	int GetCap() const { return m_cap; }
+    int GetSize() const {return m_size; }
 
 private:
 	char* m_buffer;
 	int m_cap;
+    int m_size;
 
 }; // Allocator
 

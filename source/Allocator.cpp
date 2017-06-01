@@ -9,6 +9,7 @@ namespace bimp
 
 Allocator::Allocator(int cap)
 	: m_cap(cap)
+	, m_size(cap)
 {
 	m_buffer = new char[cap];
 }
@@ -27,8 +28,8 @@ void* Allocator::Alloc(int sz)
 		fault("Allocator::Alloc too large, sz %d, cap %d\n", sz, m_cap);
 		return NULL;
 	}
-	void* ret = m_buffer;
-	m_buffer += sz;
+	void* ret = m_buffer + (m_size - m_cap);
+	// m_buffer += sz;
 	m_cap -= sz;
 	return ret;
 }
