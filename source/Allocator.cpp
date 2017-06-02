@@ -34,4 +34,9 @@ void* Allocator::Alloc(int sz)
 	return ret;
 }
 
+void Allocator::Reset()
+{
+	m_cap = m_size;
+}
+
 }

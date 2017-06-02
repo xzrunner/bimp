@@ -16,9 +16,12 @@ public:
 
 	bool Empty() const { return m_cap == 0; }
 
+	void Reset();
+
+	int GetSize() const {return m_size; }
+
 	// for debug
 	int GetCap() const { return m_cap; }
-    int GetSize() const {return m_size; }
 
 private:
 	char* m_buffer;
