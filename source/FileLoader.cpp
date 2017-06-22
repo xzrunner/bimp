@@ -41,50 +41,79 @@ struct block {
 	uint8_t data[119];
 };
 
-FileLoader::FileLoader(const std::string& filepath, bool use_cache)
-	: m_src_type(SRC_FILE)
-	, m_filepath(filepath)
-	, m_use_cache(use_cache)
-	, m_data(NULL)
-	, m_size(0)
+FileLoader::FileLoader()
+	: m_impl(NULL)
 {
 }
 
-FileLoader::FileLoader(const char* data, size_t size)
-	: m_src_type(SRC_DATA)
-	, m_use_cache(false)
-	, m_data(data)
-	, m_size(size)
+FileLoader::FileLoader(const std::string& filepath, bool use_cache)
 {
+	m_impl = new FileImpl(*this, filepath, use_cache);
+}
+
+FileLoader::FileLoader(const char* data, size_t size)
+{
+	m_impl = new DataImpl(*this, data, size);
+}
+
+FileLoader::FileLoader(fs_file* file, uint32_t offset, bool use_cache)
+{
+	m_impl = new FileInFileImpl(*this, file, offset, use_cache);
+}
+
+FileLoader::~FileLoader()
+{
+	if (m_impl) {
+		delete m_impl;
+	}
 }
 
 void FileLoader::Load()
 {
-	switch (m_src_type)
-	{
-	case SRC_FILE:
-		LoadFile();
-		break;
-	case SRC_DATA:
-		LoadData();
-		break;
+	if (m_impl) {
+		m_impl->Load();
 	}
 }
 
-void FileLoader::LoadFile()
+static const char* prepare_buf(int sz)
 {
-	fs_file* file = fs_open(m_filepath.c_str(), "rb");
-	if (!file) {
-		fault("open file fail: %s\n", m_filepath.c_str());
+	char* buf = NULL;
+	if (!CACHE_BUF) {
+		CACHE_BUF = new char[sz];
+		if (!CACHE_BUF) {
+			fault("FileLoader prepare_buf fail\n");
+		}
+		CACHE_SZ = sz;
+	} else if (CACHE_SZ < sz) {
+		delete[] CACHE_BUF;
+		CACHE_BUF = new char[sz];
+		if (!CACHE_BUF) {
+			fault("FileLoader prepare_buf fail\n");
+		}
+		CACHE_SZ = sz;
 	}
+	buf = CACHE_BUF;
+	return buf;
+}
 
+void FileLoader::LoadFromFile(fs_file* file, bool use_cache)
+{
 	int32_t sz = 0;
 	fs_read(file, &sz, sizeof(sz));
 	if (sz < 0)
 	{
 		sz = -sz;
 
-		const char* buf = PrepareBuf(sz);
+		const char* buf = NULL;
+		if (use_cache) {
+			buf = prepare_buf(sz);
+		} else {
+			buf = new char[sz];
+			if (!buf) {
+				fault("FileLoader::FileImpl::Load fail");
+			}
+		}
+
 		if (fs_read(file, (char*)buf, sz) != sz) {
 			fault("Invalid uncompress data source\n");
 		}
@@ -92,7 +121,9 @@ void FileLoader::LoadFile()
 		ImportStream is(buf, sz);
 		OnLoad(is);
 
-		if (!m_use_cache) { delete[] buf; }
+		if (!use_cache) { 
+			delete[] buf; 
+		}
 	}
 	else
 	{
@@ -102,7 +133,15 @@ void FileLoader::LoadFile()
 		size_t ori_sz = ori_sz_arr[0] << 24 | ori_sz_arr[1] << 16 | ori_sz_arr[2] << 8 | ori_sz_arr[3];
 		size_t need_sz = sz + 7 + ori_sz;
 
-		const char* buf = PrepareBuf(need_sz);
+		const char* buf = NULL;
+		if (use_cache) {
+			buf = prepare_buf(need_sz);
+		} else {
+			buf = new char[need_sz];
+			if (!buf) {
+				fault("FileLoader::FileImpl::Load fail");
+			}
+		}
 
 		struct block* block = (struct block*)buf;
 		if (sz <= 4 + LZMA_PROPS_SIZE || fs_read(file, block, sz) != sz) {
@@ -120,47 +159,71 @@ void FileLoader::LoadFile()
 		ImportStream is((char*)buffer, ori_sz);
 		OnLoad(is);
 
-		if (!m_use_cache) { delete[] buf; }
+		if (!use_cache) { 
+			delete[] buf; 
+		}
 	}
+}
 
+/************************************************************************/
+/* class FileLoader::FileImpl                                           */
+/************************************************************************/
+
+FileLoader::FileImpl::FileImpl(FileLoader& loader, const std::string& filepath, bool use_cache)
+	: LoadImpl(loader)
+	, m_filepath(filepath)
+	, m_use_cache(use_cache)
+{
+}
+
+void FileLoader::FileImpl::Load()
+{
+	fs_file* file = fs_open(m_filepath.c_str(), "rb");
+	if (!file) {
+		fault("open file fail: %s\n", m_filepath.c_str());
+	}
+	m_loader.LoadFromFile(file, m_use_cache);
 	fs_close(file);
 }
 
-void FileLoader::LoadData()
+/************************************************************************/
+/* class FileLoader::DataImpl                                           */
+/************************************************************************/
+
+FileLoader::DataImpl::DataImpl(FileLoader& loader, const char* data, size_t size)
+	: LoadImpl(loader)
+	, m_data(data)
+	, m_size(size)
 {
-	ImportStream is(m_data, m_size);
-	OnLoad(is);
 }
 
-const char* FileLoader::PrepareBuf(int sz) const
+void FileLoader::DataImpl::Load()
 {
-	char* buf = NULL;
-	if (m_use_cache)
-	{
-		if (!CACHE_BUF) {
-			CACHE_BUF = new char[sz];
-			if (!CACHE_BUF) {
-				fault("FileLoader::PrepareBuf fail\n");
-			}
-			CACHE_SZ = sz;
-		} else if (CACHE_SZ < sz) {
-			delete[] CACHE_BUF;
-			CACHE_BUF = new char[sz];
-			if (!CACHE_BUF) {
-				fault("FileLoader::PrepareBuf fail\n");
-			}
-			CACHE_SZ = sz;
-		}
-		buf = CACHE_BUF;
+	ImportStream is(m_data, m_size);
+	m_loader.OnLoad(is);
+}
+
+/************************************************************************/
+/* class FileLoader::FileInFileImpl                                     */
+/************************************************************************/
+
+FileLoader::FileInFileImpl::
+FileInFileImpl(FileLoader& loader, fs_file* file, uint32_t offset, bool use_cache)
+	: LoadImpl(loader)
+	, m_file(file)
+	, m_offset(offset)
+	, m_use_cache(use_cache)
+{
+}
+
+void FileLoader::FileInFileImpl::Load()
+{
+	if (!m_file) {
+		return;
 	}
-	else
-	{
-		buf = new char[sz];
-		if (!buf) {
-			fault("FileLoader::PrepareBuf fail\n");
-		}
-	}
-	return buf;
+
+	fs_seek_from_head(m_file, m_offset);
+	m_loader.LoadFromFile(m_file, m_use_cache);	
 }
 
 }
