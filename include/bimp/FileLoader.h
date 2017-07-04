@@ -36,6 +36,7 @@ private:
 	public:
 		LoadImpl(FileLoader& loader)
 			: m_loader(loader) {}
+		virtual ~LoadImpl() {}
 
 		virtual void Load() = 0;
 
