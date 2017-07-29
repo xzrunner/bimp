@@ -32,6 +32,9 @@ public:
 	const char* String(Allocator& alloc);
 	std::string String();
 
+	const char* LongString(Allocator& alloc);
+	std::string LongString();
+
 	bool Empty() const { return m_size == 0; }
 
 protected:

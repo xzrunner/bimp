@@ -114,4 +114,39 @@ std::string ImportStream::String()
 	return str;
 }
 
+const char* ImportStream::LongString(Allocator& alloc)
+{
+	int n = UInt16();
+	if (n == 0xffff) {
+		return NULL;
+	}
+	if (m_size < n) {
+		fault("Invalid import String");
+	}
+	char* buf = static_cast<char*>(alloc.Alloc(ALIGN_4BYTE(n  + 1)));
+	memcpy(buf, m_stream, n);
+	buf[n] = 0;
+	m_stream += n;
+	m_size -= n;
+
+	return buf;
+}
+
+std::string ImportStream::LongString()
+{
+	int n = UInt16();
+	if (n == 0xffff) {
+		return "";
+	}
+	if (m_size < n) {
+		fault("Invalid import String");
+	}
+
+	std::string str(m_stream, n);
+	m_stream += n;
+	m_size -= n;
+
+	return str;
+}
+
 }
