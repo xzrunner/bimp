@@ -1,1 +1,3 @@
 platform/msvc2008/bimp
+*.d
+
