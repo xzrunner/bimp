@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="1.bimp"
-	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	ProjectGUID="{F22A86E7-B73F-4F6A-9EA8-E4AE9CC9D885}"
 	RootNamespace="bimp"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
