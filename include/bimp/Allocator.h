@@ -1,7 +1,7 @@
 #ifndef _BIMP_ALLOCATOR_H_
 #define _BIMP_ALLOCATOR_H_
 
-#include <CU_Uncopyable.h>
+#include <cu/uncopyable.h>
 
 namespace bimp
 {

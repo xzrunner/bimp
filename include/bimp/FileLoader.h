@@ -1,7 +1,7 @@
 #ifndef _BIMP_FILE_LOADER_H_
 #define _BIMP_FILE_LOADER_H_
 
-#include <CU_Uncopyable.h>
+#include <cu/uncopyable.h>
 #include <fs_file.h>
 
 #include <stdint.h>

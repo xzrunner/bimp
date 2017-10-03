@@ -1,7 +1,7 @@
 #ifndef _BIMP_IMPORT_STREAM_H_
 #define _BIMP_IMPORT_STREAM_H_
 
-#include <CU_Uncopyable.h>
+#include <cu/uncopyable.h>
 
 #include <string>
 
