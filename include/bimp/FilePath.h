@@ -1,8 +1,6 @@
 #ifndef _BIMP_FILE_PATH_H_
 #define _BIMP_FILE_PATH_H_
 
-#include <memmgr/Allocator.h>
-
 #include <string>
 
 #include <stdint.h>
@@ -11,16 +9,12 @@
 namespace bimp
 {
 
-using ResString = mm::AllocString;
-
 class FilePath
 {
 public:
 	explicit FilePath() : m_offset(MAX_OFFSET) {}
-	explicit FilePath(const ResString& filepath, uint32_t offset = MAX_OFFSET)
-		: m_filepath(filepath), m_offset(offset) {}
 	explicit FilePath(const std::string& filepath, uint32_t offset = MAX_OFFSET)
-		: m_filepath(filepath.c_str()), m_offset(offset) {}
+		: m_filepath(filepath), m_offset(offset) {}
 	explicit FilePath(const char* filepath, uint32_t offset = MAX_OFFSET)
 		: m_filepath(filepath), m_offset(offset) {}
 
@@ -55,8 +49,8 @@ private:
 	static const uint32_t MAX_OFFSET = 0xffffffff;
 
 private:
-	ResString m_filepath;
-	uint32_t  m_offset;
+	std::string m_filepath;
+	uint32_t    m_offset;
 
 }; // FilePath
 
