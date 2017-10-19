@@ -4,9 +4,9 @@
 #include <cu/uncopyable.h>
 #include <fs_file.h>
 
-#include <stdint.h>
-
 #include <string>
+
+#include <stdint.h>
 
 namespace bimp
 {
@@ -54,7 +54,7 @@ private:
 
 	private:
 		std::string m_filepath;
-		bool        m_use_cache;
+		bool            m_use_cache;
 
 	}; // FileImpl
 
