@@ -2,7 +2,7 @@
 #define _BIMP_IMPORT_STREAM_H_
 
 #include <cu/uncopyable.h>
-#include <memmgr/Allocator.h>
+#include <cu/cu_stl.h>
 
 #include <stdint.h>
 
@@ -29,10 +29,10 @@ public:
 	int Size() const { return m_size; }
 
 	const char* String(Allocator& alloc);
-	mm::AllocString String();
+	CU_STR String();
 
 	const char* LongString(Allocator& alloc);
-	mm::AllocString LongString();
+	CU_STR LongString();
 
 	bool Empty() const { return m_size == 0; }
 

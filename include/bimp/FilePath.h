@@ -1,7 +1,7 @@
 #ifndef _BIMP_FILE_PATH_H_
 #define _BIMP_FILE_PATH_H_
 
-#include <memmgr/Allocator.h>
+#include <cu/cu_stl.h>
 
 #include <string>
 
@@ -15,7 +15,7 @@ class FilePath
 {
 public:
 	explicit FilePath() : m_offset(MAX_OFFSET) {}
-	explicit FilePath(const mm::AllocString& filepath, uint32_t offset = MAX_OFFSET)
+	explicit FilePath(const CU_STR& filepath, uint32_t offset = MAX_OFFSET)
 		: m_filepath(filepath.c_str()), m_offset(offset) {}
 
 	bool operator != (const FilePath& path) const {
@@ -34,7 +34,7 @@ public:
 	const auto& GetFilepath() const { return m_filepath; }
 	uint32_t GetOffset() const { return m_offset; }
 
-	void SetFilepath(const mm::AllocString& filepath) { m_filepath = filepath.c_str(); }
+	void SetFilepath(const CU_STR& filepath) { m_filepath = filepath.c_str(); }
 
 	void Serialize(char* buf) const {
 		memcpy(buf, &m_offset, sizeof(m_offset));

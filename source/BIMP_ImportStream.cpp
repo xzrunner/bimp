@@ -97,7 +97,7 @@ const char* ImportStream::String(Allocator& alloc)
 	return buf;
 }
 
-mm::AllocString ImportStream::String()
+CU_STR ImportStream::String()
 {
 	int n = UInt8();
 	if (n == 255) {
@@ -107,7 +107,7 @@ mm::AllocString ImportStream::String()
 		fault("Invalid import String");
 	}
 
-	mm::AllocString str(m_stream, n);
+	CU_STR str(m_stream, n);
 	m_stream += n;
 	m_size -= n;
 
@@ -132,7 +132,7 @@ const char* ImportStream::LongString(Allocator& alloc)
 	return buf;
 }
 
-mm::AllocString ImportStream::LongString()
+CU_STR ImportStream::LongString()
 {
 	int n = UInt16();
 	if (n == 0xffff) {
@@ -142,7 +142,7 @@ mm::AllocString ImportStream::LongString()
 		fault("Invalid import String");
 	}
 
-	mm::AllocString str(m_stream, n);
+	CU_STR str(m_stream, n);
 	m_stream += n;
 	m_size -= n;
 
