@@ -22,11 +22,11 @@ Allocator::~Allocator()
 void* Allocator::Alloc(int sz)
 {
 	if (sz <= 0) {
-		return NULL;
+		return nullptr;
 	}
 	if (m_cap < sz) {
 		fault("Allocator::Alloc too large, sz %d, cap %d\n", sz, m_cap);
-		return NULL;
+		return nullptr;
 	}
 	void* ret = m_buffer + (m_size - m_cap);
 	// m_buffer += sz;

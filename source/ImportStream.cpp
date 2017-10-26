@@ -83,7 +83,7 @@ const char* ImportStream::String(Allocator& alloc)
 {
 	int n = UInt8();
 	if (n == 255) {
-		return NULL;
+		return nullptr;
 	}
 	if (m_size < n) {
 		fault("Invalid import String");
@@ -118,7 +118,7 @@ const char* ImportStream::LongString(Allocator& alloc)
 {
 	int n = UInt16();
 	if (n == 0xffff) {
-		return NULL;
+		return nullptr;
 	}
 	if (m_size < n) {
 		fault("Invalid import String");

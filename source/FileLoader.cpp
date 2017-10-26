@@ -15,7 +15,7 @@
 namespace bimp
 {
 
-static char* CACHE_BUF = NULL;
+static char* CACHE_BUF = nullptr;
 static int CACHE_SZ = 0;
 
 #define PACKAGE_SIZE 512
@@ -42,7 +42,7 @@ struct block {
 };
 
 FileLoader::FileLoader()
-	: m_impl(NULL)
+	: m_impl(nullptr)
 {
 }
 
@@ -77,7 +77,7 @@ void FileLoader::Load()
 
 static const char* prepare_buf(int sz)
 {
-	char* buf = NULL;
+	char* buf = nullptr;
 	if (!CACHE_BUF) {
 		CACHE_BUF = new char[sz];
 		if (!CACHE_BUF) {
@@ -104,7 +104,7 @@ void FileLoader::LoadFromFile(fs_file* file, bool use_cache)
 	{
 		sz = -sz;
 
-		const char* buf = NULL;
+		const char* buf = nullptr;
 		if (use_cache) {
 			buf = prepare_buf(sz);
 		} else {
@@ -133,7 +133,7 @@ void FileLoader::LoadFromFile(fs_file* file, bool use_cache)
 		size_t ori_sz = ori_sz_arr[0] << 24 | ori_sz_arr[1] << 16 | ori_sz_arr[2] << 8 | ori_sz_arr[3];
 		size_t need_sz = sz + 7 + ori_sz;
 
-		const char* buf = NULL;
+		const char* buf = nullptr;
 		if (use_cache) {
 			buf = prepare_buf(need_sz);
 		} else {
