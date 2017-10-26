@@ -1,6 +1,6 @@
-#include "BIMP_ImportStream.h"
-#include <bimp/Allocator.h>
-#include "bimp_typedef.h"
+#include "bimp/ImportStream.h"
+#include "bimp/Allocator.h"
+#include "bimp/typedef.h"
 
 #include <fault.h>
 #include <string.h>

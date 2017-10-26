@@ -1,6 +1,6 @@
-#include "FileLoader.h"
-#include "BIMP_ImportStream.h"
-#include "bimp_typedef.h"
+#include "bimp/FileLoader.h"
+#include "bimp/ImportStream.h"
+#include "bimp/typedef.h"
 
 #include <fault.h>
 #include <fs_file.h>
