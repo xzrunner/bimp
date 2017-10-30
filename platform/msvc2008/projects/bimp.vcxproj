@@ -10,6 +10,18 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\bimp\Allocator.h" />
+    <ClInclude Include="..\..\..\include\bimp\FileLoader.h" />
+    <ClInclude Include="..\..\..\include\bimp\FilePath.h" />
+    <ClInclude Include="..\..\..\include\bimp\ImportStream.h" />
+    <ClInclude Include="..\..\..\include\bimp\typedef.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\Allocator.cpp" />
+    <ClCompile Include="..\..\..\source\FileLoader.cpp" />
+    <ClCompile Include="..\..\..\source\ImportStream.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>1.bimp</ProjectName>
     <ProjectGuid>{F22A86E7-B73F-4F6A-9EA8-E4AE9CC9D885}</ProjectGuid>
@@ -52,7 +64,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\bimp;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\bimp;..\..\..\..\cu\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -66,7 +78,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\bimp;..\..\..\..\cu\src\cu;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\bimp;..\..\..\..\cu\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lzma\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -75,17 +87,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\source\Allocator.cpp" />
-    <ClCompile Include="..\..\..\source\BIMP_ImportStream.cpp" />
-    <ClCompile Include="..\..\..\source\FileLoader.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\include\bimp\Allocator.h" />
-    <ClInclude Include="..\..\..\include\bimp\BIMP_ImportStream.h" />
-    <ClInclude Include="..\..\..\include\bimp\bimp_typedef.h" />
-    <ClInclude Include="..\..\..\include\bimp\FileLoader.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
