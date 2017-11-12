@@ -50,7 +50,7 @@ private:
 	public:
 		FileImpl(FileLoader& loader, const std::string& filepath, bool use_cache);
 
-		virtual void Load();
+		virtual void Load() override;
 
 	private:
 		std::string m_filepath;
@@ -63,7 +63,7 @@ private:
 	public:
 		DataImpl(FileLoader& loader, const char* data, size_t size);
 
-		virtual void Load();
+		virtual void Load() override;
 
 	private:
 		const char* m_data;
@@ -76,7 +76,7 @@ private:
 	public:
 		FileInFileImpl(FileLoader& loader, fs_file* file, uint32_t offset, bool use_cache);
 
-		virtual void Load();
+		virtual void Load() override;
 
 	private:
 		fs_file* m_file;
