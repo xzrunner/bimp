@@ -2,6 +2,7 @@
 #define _BIMP_FILE_LOADER_H_
 
 #include <cu/uncopyable.h>
+#include <cu/cu_stl.h>
 #include <fs_file.h>
 
 #include <string>
@@ -17,7 +18,7 @@ class FileLoader : private cu::Uncopyable
 {
 public:
 	FileLoader();
-	FileLoader(const std::string& filepath, bool use_cache = true);
+	FileLoader(const CU_STR& filepath, bool use_cache = true);
 	FileLoader(const char* data, size_t size);
 	FileLoader(fs_file* file, uint32_t offset, bool use_cache = true);
 	virtual ~FileLoader();
@@ -48,13 +49,13 @@ private:
 	class FileImpl : public LoadImpl
 	{
 	public:
-		FileImpl(FileLoader& loader, const std::string& filepath, bool use_cache);
+		FileImpl(FileLoader& loader, const CU_STR& filepath, bool use_cache);
 
 		virtual void Load() override;
 
 	private:
-		std::string m_filepath;
-		bool            m_use_cache;
+		CU_STR m_filepath;
+		bool   m_use_cache;
 
 	}; // FileImpl
 

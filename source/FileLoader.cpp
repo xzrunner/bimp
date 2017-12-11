@@ -51,7 +51,7 @@ FileLoader::FileLoader()
 {
 }
 
-FileLoader::FileLoader(const std::string& filepath, bool use_cache)
+FileLoader::FileLoader(const CU_STR& filepath, bool use_cache)
 {
 	m_impl = new FileImpl(*this, filepath, use_cache);
 }
@@ -174,7 +174,7 @@ void FileLoader::LoadFromFile(fs_file* file, bool use_cache)
 /* class FileLoader::FileImpl                                           */
 /************************************************************************/
 
-FileLoader::FileImpl::FileImpl(FileLoader& loader, const std::string& filepath, bool use_cache)
+FileLoader::FileImpl::FileImpl(FileLoader& loader, const CU_STR& filepath, bool use_cache)
 	: LoadImpl(loader)
 	, m_filepath(filepath)
 	, m_use_cache(use_cache)

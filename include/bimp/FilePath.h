@@ -49,8 +49,8 @@ private:
 	static const uint32_t MAX_OFFSET = 0xffffffff;
 
 private:
-	std::string m_filepath;
-	uint32_t    m_offset;
+	CU_STR   m_filepath;
+	uint32_t m_offset;
 
 }; // FilePath
 
