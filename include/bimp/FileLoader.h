@@ -3,11 +3,12 @@
 
 #include <cu/uncopyable.h>
 #include <cu/cu_stl.h>
-#include <fs_file.h>
 
 #include <string>
 
 #include <stdint.h>
+
+struct fs_file;
 
 namespace bimp
 {
