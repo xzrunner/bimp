@@ -23,13 +23,8 @@ static int CACHE_SZ = 0;
 
 #define LZMA_PROPS_SIZE 5
 
-#ifdef LZMA_NEW
-static void *SzAlloc(ISzAllocPtr p, size_t size) { UNUSED(p); return MyAlloc(size); }
-static void SzFree(ISzAllocPtr p, void *address) { UNUSED(p); MyFree(address); }
-#else
 static void *SzAlloc(void* p, size_t size) { UNUSED(p); return MyAlloc(size); }
 static void SzFree(void* p, void *address) { UNUSED(p); MyFree(address); }
-#endif // ISzAllocPtr
 static ISzAlloc g_Alloc = { SzAlloc, SzFree };
 
 static inline int
