@@ -1,0 +1,5 @@
+bimp/
+projects/*
+
+!projects/bimp.vcxproj
+!projects/bimp.vcxproj.filters
